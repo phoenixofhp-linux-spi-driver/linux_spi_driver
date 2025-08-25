@@ -1,0 +1,25 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+    compatible = "brcm,bcm2835";
+
+    fragment@0 {
+        target = <&spi0>; // SPI0 controller
+        __overlay__ {
+            status = "okay";
+
+            spidev@0 {
+                status = "disabled";
+            };
+
+            bmp180@0 {
+                compatible = "custom,spi_bmp180";
+                reg = <0>; // CE0
+                spi-max-frequency = <500000>; // 500 kHz
+                status = "okay";
+            };
+        };
+    };
+};
+
